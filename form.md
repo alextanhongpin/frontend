@@ -1,5 +1,16 @@
-## Measuring System Capacity
+## Autocapitalize
 
+```
+https://developers.google.com/web/updates/2015/04/autocapitalize
+```
+
+## Copy and Paste
+
+```
+https://developers.google.com/web/updates/2015/04/cut-and-copy-commands
+```
+
+## Form to Measure System Capacity
 
 Form to measure the capacity constraints of the system:
 
