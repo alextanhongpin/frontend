@@ -57,3 +57,57 @@ Form to measure the capacity constraints of the system:
 	</div>
 </form>
 ```
+
+
+## Autofill
+
+```html
+Reference <a href='https://developers.google.com/web/updates/2015/06/checkout-faster-with-autofill'>here</a>.
+<h1>
+	Credit Card
+</h1>
+<label for="frmNameCC">Name on card</label>
+<input name="ccname" id="frmNameCC" required placeholder="Full Name" autocomplete="cc-name">
+
+<label for="frmCCNum">Card Number</label>
+<input name="cardnumber" id="frmCCNum" required autocomplete="cc-number">
+
+<label for="frmCCCVC">CVC</label>
+<input name="cvc" id="frmCCCVC" required autocomplete="cc-csc">
+
+<label for="frmCCExp">Expiry</label>
+<input name="cc-exp" id="frmCCExp" required placeholder="MM-YYYY" autocomplete="cc-exp">
+<h1>
+	Name
+</h1>
+<label for="frmNameA">Name</label>
+<input name="name" id="frmNameA" placeholder="Full name" required autocomplete="name">
+
+<label for="frmEmailA">Email</label>
+<input type="email" name="email" id="frmEmailA" placeholder="name@example.com" required autocomplete="email">
+
+<label for="frmEmailC">Confirm Email</label>
+<input type="email" name="emailC" id="frmEmailC" placeholder="name@example.com" required autocomplete="email">
+<h1>
+	Address
+</h1>
+<label for="frmAddressS">Address</label>
+<input name="ship-address" required id="frmAddressS" placeholder="123 Any Street" autocomplete="shipping street-address">
+
+<label for="frmCityS">City</label>
+<input name="ship-city" required id="frmCityS" placeholder="New York" autocomplete="shipping locality">
+
+<label for="frmStateS">State</label>
+<input name="ship-state" required id="frmStateS" placeholder="NY" autocomplete="shipping region">
+
+<label for="frmZipS">Zip</label>
+<input name="ship-zip" required id="frmZipS" placeholder="10011" autocomplete="shipping postal-code">
+
+<label for="frmCountryS">Country</label>
+<input name="ship-country" required id="frmCountryS" placeholder="USA" autocomplete="shipping country">
+<h1>
+	Phone
+</h1>
+<label for="frmPhoneNumA">Phone</label>
+<input type="tel" name="phone" id="frmPhoneNumA" placeholder="+1-650-450-1212" required autocomplete="tel">
+```
