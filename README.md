@@ -2,7 +2,7 @@
 
 ## Pair fonts 
 
-Pair differnt fonts together to get better impact
+Pair different fonts together to get better impact
 
 References:
 - https://fontpair.co/
@@ -21,6 +21,9 @@ References:
 ## Tables
 
 - Try to keep at max 4 columns - more than that is too messy.
+- show filters by fields with counts next to it
+- simplify actions without submit button (direct update). To delete, just select a none.
+- if there are many columns with different statuses (pending, reject payment), roles (admin, owner etc), consider breaking your tables so that the table only shows one status. Note that if you have an operation that modifies the user's status, it might move the data to another table. Dependending on your use case, this might not be something you want.
 
 ## Icons 
 
@@ -32,3 +35,14 @@ References:
 - standardize opacity ratio (40% etc)
 - colored text could be cleaner than text with background filled
 - try to keep the usage of colors to the minimum (red, black and white will normally suffice)
+
+## Notifications
+- Instead of generic notification, why not add a personalised recommendation one, by a specific person?
+
+## Search/ history
+- show recent stuff
+- show the last interacted items
+
+## Forms
+- show the last selected options (e.g. category, address)
+- use auto-fill
