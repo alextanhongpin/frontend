@@ -9,6 +9,11 @@
 - use relative datetime
 - use consistent formatting DD/MM/YYYY
 - show partial date, but full date as the tooltip for curious users
+- use labels to give date context
+  - if the item is new (created at less than 1 minute), show a new label
+  - else
+  - if the item is created today, show a created label
+  - if the item is edited, show an edited label
 
 
 ## Placeholders
@@ -42,3 +47,7 @@
 - highlight the search keyword
 - show the last responses (last interacted item, last search keywords and recent results)
 - handle empty scenario
+
+## Inline editing
+- useful to allow inline real-time editing, when the component is blurred, check the state - if there are changes, update it
+- show an edited label next to the item
