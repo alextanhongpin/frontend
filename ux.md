@@ -24,10 +24,31 @@
 ## Input
 
 - ensure the focused input has a clear indication (outline) that it is being focused now
+- user can submit empty spaces
+- user can submit float when the input expect number only
+- user can submit emoji etc
+- pasting values will cause error
+- no limit on text length/min max number
+- sql injection values
+- values provided is not one of the enum
+- user can submit empty string (no declaration of required/optional field)
+- user can submit negative value for forms
 
 ## Double-submit
 
 - use a mutex to ensure the action happens only once
+- when you have an increment counter, pressing -tive multiple times will cause the counter to be negative
+- purchase buttons (or any other buttons) can be submitted twice
+- pressing enter twice will trigger double submit on the forms
+
+## Api
+
+- submitting -tive pagination in limit/offset
+- submitting float values in pagination
+- submitting invalid type for query string
+- super long query string that can break the application
+- super large payload
+- unlimited pagination value
 
 ## Debounce
 
@@ -51,3 +72,20 @@
 ## Inline editing
 - useful to allow inline real-time editing, when the component is blurred, check the state - if there are changes, update it
 - show an edited label next to the item
+
+## Back button
+
+- Perform logout, then press back button. 
+- Open multiple tabs, logout from one, the rest is not logged out.
+- Open multiple tabs for a form, edit one. Then submit the unedited one.
+- There are plenty of scenario with multiple tabs
+
+## Time Issue
+
+- an event will expire in 10 seconds. User leave the form for purchasing the ticket events on and submit it the next day. If the server did not validate, then the submission can go through
+- setting timeout for forms (must process within 10 minutes or expired, idle state)
+
+## Online/offline
+
+User goes to the site/mobile when they are connected. When they turn off the wifi, the state is broken/action cannot be submitted.
+
