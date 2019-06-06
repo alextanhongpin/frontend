@@ -84,6 +84,7 @@
 
 - an event will expire in 10 seconds. User leave the form for purchasing the ticket events on and submit it the next day. If the server did not validate, then the submission can go through
 - setting timeout for forms (must process within 10 minutes or expired, idle state)
+- we can set timeout for react at the componentDidMount, and unregister it at the componentWillUnmount
 
 ## Online/offline
 
