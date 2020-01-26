@@ -46,3 +46,21 @@ References:
 ## Forms
 - show the last selected options (e.g. category, address)
 - use auto-fill
+
+
+
+## Frontend components
+
+- Use Storybook to test different states of the components
+- Avoid conditionals in the component, but having default states is different
+- Authentication is still one major concern, especially when dealing with routing
+- Client side storage for kv:storage offline
+- Web workers usage and offline syncing
+- SEO
+- Accessibility
+- Testing
+- Progressive web app
+- WEB Apis - beacon, service workers, web sockets, notifications, device orientation, payments and credentials
+- Desktop applications
+- Web assembly
+
