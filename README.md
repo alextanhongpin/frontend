@@ -64,3 +64,11 @@ References:
 - Desktop applications
 - Web assembly
 
+
+# Components Test Cases
+
+- Default
+- No data
+- Low data
+- Loading
+- Maximum data
