@@ -123,3 +123,24 @@ ReactDOM.render(<App />, rootElement);
     "include": ["src"]
 }
 ```
+
+
+## Lint-staged
+
+Typical mistake
+
+```
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "pre-push": "npm test"
+    }
+  }
+```
+
+This will trigger linting on all files, not specific files. Do this instead:
+
+```diff
+-     "pre-commit": "npm run lint",
++     "pre-commit": "prettier --fix",
+```
