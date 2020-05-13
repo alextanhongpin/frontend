@@ -110,3 +110,16 @@ function App() {
 const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
 ```
+
+## Absolute path imports
+
+`NODE_PATH=/src` is deprecated. 
+`jsconfig.json`:
+```json
+{
+    "compilerOptions": {
+        "baseUrl": "src"
+    },
+    "include": ["src"]
+}
+```
