@@ -144,3 +144,20 @@ This will trigger linting on all files, not specific files. Do this instead:
 -     "pre-commit": "npm run lint",
 +     "pre-commit": "prettier --fix",
 ```
+
+
+## Dealing with prop drilling
+
+Given the component hierachy:
+```
+Grandparent -> parent -> child
+```
+
+If we need to handle the child events, we need to pass the handler from `grandparent` to `child` component, polluting the `parent` component with unnecessary props. Still, there are several advantages of passing down the props than handling it on the child:
+
+- the parent could be a list of child, and parent needs to have the knowledge of the child, e.g. mutation (create/delete) will add/remove and item from the child
+- by passing down props, we achieve full stateless components, and it makes testing easier
+- child components are pure dumb components/the opposite holds true - the parent now contains a huge chunk of logic
+
+
+Ideally, the child component should dispatch an event to the parent component. We can do this by passing down a `dispatch` event bus and register the event handler at the `grandparent` component.
