@@ -162,6 +162,134 @@ If we need to handle the child events, we need to pass the handler from `grandpa
 
 Ideally, the child component should dispatch an event to the parent component. We can do this by passing down a `dispatch` event bus and register the event handler at the `grandparent` component.
 
+The first idea is to just implement a generic dispatch:
+
+```js
+// child parent dispatch delegation
+
+const Parent = () => {
+  const dispatch = (action) => {
+      switch (action.type) {
+        case 'CREATE':
+        case 'UPDATE':
+        case 'REMOVE':
+        default:
+      }
+  }
+  return <div>
+    <Child dispatch={dispatch}>
+  </div>
+}
+    
+const Child = ({dispatch}) => {
+    const innerDispatch = (action) => {
+      switch (action.type) {
+        case 'CREATE':
+        default:
+          dispatch(action)
+      }
+    }
+    
+    return <InnerChild dispatch={innerDispatch}/>
+}
+
+
+dispatch({
+  type: 'CREATE',
+  payload: {},
+  meta: {evt}
+})
+
+dispatch({
+  type: 'UPDATE'
+})
+```
+
+This way, we only pass down one function. But how about an event bus implementation?
+
+```js
+
+const EventBus = (events = {}) => {
+  events = events ?? {}
+  return {
+    on(event, fn) {
+      if (!events[event]) events[event] = []
+      events[event].push(fn)
+    },
+    emit(event, params) {
+      const fns = events[event]
+      if (!fns) return
+      for (let fn of fns) {
+        fn(params)
+      }
+    },
+    off(event, fn) {
+      const fns = events[event]
+      if (!fns) return
+      events[event] = fns.filter(i => i !== fn)
+    }
+  }
+}
+
+const useDispatcher = (events = {}) => {
+  // Events can only be registered once.
+  const memoizedEvents = useMemo(() => events, [])
+  const [dispatcher, setDispatcher] = useState({})
+  
+  useEffect(() => {
+    const bus = EventBus()
+    for (let key in memoizedEvents) {
+      bus.on(key, events[key])
+    }
+    setDispatcher(bus)
+    return () => {
+      for (let key in memoizedEvents) {
+        bus.off(key, events[key])
+      }
+    }
+  }, [memoizedEvents])
+  
+  return dispatcher
+}
+```
+
+After some thoughts, I realized it won't work - mainly because the handler can contain functions that would change. That is mainly the reason why hooks are created.
+
+```js
+const initialState = {
+  updateEvent: {},
+  removeEvent: {},
+  createEvent: {}
+}
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'update':
+      return {...state, updateEvent: action.payload}
+    case 'remove':
+      return {...state, removeEvent: action.payload}
+    case 'create':
+      return {...state, createEvent: action.payload}
+    default:
+      throw new Error(`not implemented: ${action.type}`)
+  }
+}
+
+const useUpdate = (state) => {
+  useEffect(() => {
+    handleUpdate(state)
+  }, [state])
+}
+
+const Component = () => {
+  const [state, dispatch] = useReducer(reducer, initialState)
+  useUpdate(state.updateEvent)
+  useCreate(state.createEvent)
+  
+  return <Child dispatch={dispatch/>
+}
+```
+
 
 ## Useful tips
 
