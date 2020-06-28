@@ -161,3 +161,11 @@ If we need to handle the child events, we need to pass the handler from `grandpa
 
 
 Ideally, the child component should dispatch an event to the parent component. We can do this by passing down a `dispatch` event bus and register the event handler at the `grandparent` component.
+
+
+## Useful tips
+
+- use next js sparingly (based on the documentation and github issues, when the route requires authentication, it will no longer get the benefits of nextjs SSR or SEO, since you need to fetch customized user data which should not be cached, hence defeating the purpose of SSR. Their suggestion is to use client-side fetching instead). I have been wondering why our SSR is not as fast as they promoted, turns out due to the limitation mentioned above, it's not optimized)
+- remove redux saga (use hooks). It complicates the code, and actually it is no longer necessary in modern stack)
+- remove redux. not all application need global states. The current nextjs + redux implementation seems to have some issue too (user states will mix up!). For global client state, use context api or recoiljs. The use case is usually limited for global states, like global theme or auth user data.
+- explore graphql. it's fast.
