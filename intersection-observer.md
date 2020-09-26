@@ -52,3 +52,7 @@ Useful to detect elements entering the viewport and applying animation to them (
 	
 </script>
 ```
+
+
+Note
+- how to handle anchor link, with click and highlighting and scrolling
