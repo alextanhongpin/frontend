@@ -1,0 +1,28 @@
+.container {
+	scroll-snap-type: mandatory;
+	scroll-snap-points-y: repeat(300px);
+	scroll-snap-type: y mandatory;
+	/* Only works if we limit the height of the container. */
+	max-height: 480px;
+	overflow: scroll;
+}
+
+
+.child {
+	scroll-snap-align: start;
+	height: 480px;
+	width: 100%;
+	display: block;
+}
+
+.child:nth-child(1) {
+	background: black;
+}
+
+.child:nth-child(2) {
+	background: gray;
+}
+
+.child:nth-child(3) {
+	background: silver;
+}

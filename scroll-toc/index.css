@@ -1,0 +1,27 @@
+*, *:before, *:after {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+.container {
+	font-size: 16px;
+	font-family: Helvetica, Arial;
+	display: grid;
+	grid-template-columns: 240px 640px;
+}
+
+main {
+	/* Sufficient padding for scrolling. */
+	padding: 0 0 720px 0;
+}
+
+aside ul {
+	position: sticky;
+	top: 16px;
+}
+
+aside ul li.active {
+	font-weight: bold;
+}
