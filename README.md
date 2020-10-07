@@ -72,3 +72,15 @@ References:
 - Low data
 - Loading
 - Maximum data
+
+
+## Rules/styleguide
+
+A layout never imposes padding or element styles on its chil‐ dren. It is only concerned with their horizontal or vertical align‐ ment and spacing.
+• Themes and other data attributes never force changes in appearance; they are always a context that layouts, components, and elements can subscribe to.
+• A component always touches all four sides of its parent con‐ tainer. No element will have top or left margins, and all last chil‐ dren (right or bottom) will have their margins cleared.
+• The component itself never has backgrounds, widths, floats, padding, or margins. Component styles only target the elements inside.
+• Every element has a single, unique, component-scoped class. All styles are applied directly to that selector, modified only by con‐ texts and themes.
+• Elements never use top margins. The first element touches the top of its component.
+• JavaScript is never bound to any element class. Functionality is “opted in” via data attributes.
+
