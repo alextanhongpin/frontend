@@ -297,3 +297,26 @@ const Component = () => {
 - remove redux saga (use hooks). It complicates the code, and actually it is no longer necessary in modern stack)
 - remove redux. not all application need global states. The current nextjs + redux implementation seems to have some issue too (user states will mix up!). For global client state, use context api or recoiljs. The use case is usually limited for global states, like global theme or auth user data.
 - explore graphql. it's fast.
+
+
+## Replace string with HTML
+
+```js
+function stringReplace(str, replacements) {
+  const matches = Object.keys(replacements).map(key => ({ 
+    key, 
+    value: new RegExp(`\\b${key}\\b`)
+  }))
+  
+  const result = str.split(' ').flatMap((part) => {
+    const match = matches.find(match => part.match(match.value))  
+    if (!match) return [part, ' ']
+    
+    const result = part.split(match.key).flatMap(p => [p, replacements[match.key]])
+    result.pop()
+    return [result, ' ']
+  })
+  result.pop()
+  return result.flatMap(a => a).filter(Boolean)
+}
+```
