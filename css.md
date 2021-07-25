@@ -26,3 +26,39 @@ html {
 
 img { box-sizing: content-box; }
 ```
+
+## Change text color based on brightness of the covered background area
+
+
+Depending on the brightness of the background color, the text color will either be black or white.
+
+```html
+<h1>Hello world</h1>
+<script>
+  const rgb = [255, 0, 0];
+
+  // Randomly change to showcase updates
+  setInterval(setContrast, 1000);
+
+  function setContrast() {
+    // Randomly update colours
+    rgb[0] = Math.round(Math.random() * 255);
+    rgb[1] = Math.round(Math.random() * 255);
+    rgb[2] = Math.round(Math.random() * 255);
+
+    // http://www.w3.org/TR/AERT#color-contrast
+    const brightness = Math.round(
+      (parseInt(rgb[0]) * 299 +
+        parseInt(rgb[1]) * 587 +
+        parseInt(rgb[2]) * 114) /
+        1000
+    );
+    const textColour = brightness > 125 ? "black" : "white";
+    const backgroundColour =
+      "rgb(" + rgb[0] + "," + rgb[1] + "," + rgb[2] + ")";
+
+    document.body.style.color = textColour;
+    document.body.style.backgroundColor = backgroundColour;
+  }
+</script>
+```
