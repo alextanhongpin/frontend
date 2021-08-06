@@ -62,3 +62,6 @@ Depending on the brightness of the background color, the text color will either 
   }
 </script>
 ```
+
+## Shape Outside
+https://css-tricks.com/almanac/properties/s/shape-outside/
