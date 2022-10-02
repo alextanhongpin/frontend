@@ -22,5 +22,15 @@ Output:
 ## Display date in another time zone
 
 ```js
-new Date().toLocaleString('en-us', { timeZone: 'Asia/Jakarta'})
+new Date().toLocaleString('en-us', { 
+  timeZone: 'Asia/Jakarta'
+})
+
+// Other formatting options.
+new Date().toLocaleString('en-us', { 
+  timeZone: 'Asia/Jakarta',
+  dateStyle: 'short' | 'medium' | 'long',
+  timeStyle: 'short' | 'medium' | 'long',
+  timeZoneStyle: 'short' | 'long' // Cannot be used if dateStyle and timeStyle is set.
+})
 ```
