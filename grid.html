@@ -1,0 +1,77 @@
+<head>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <style>
+    .main {
+      display: grid;
+      grid:
+        "header header header" 60px
+        "left content right" 1fr
+        "footer footer footer" 60px / 3fr 10fr 3fr;
+      grid-column-gap: 1rem;
+      min-height: 100%;
+    }
+    .header {
+      grid-area: header;
+      background: lightgrey;
+    }
+    .left {
+      grid-area: left;
+      background: lightpink;
+    }
+    .right {
+      grid-area: right;
+      background: lightgreen;
+    }
+    .content {
+      grid-area: content;
+      background: lightblue;
+    }
+    .footer {
+      grid-area: footer;
+    }
+
+    @media (max-width: 1040px) {
+      .main {
+        grid:
+          "header header" 60px
+          "left content" 1fr
+          "footer footer" 60px / 200px 1fr;
+      }
+      .right {
+        display: none;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .main {
+        grid:
+          "header" 60px
+          "left" 60px
+          "content" 1fr
+          "footer" 60px / 1fr;
+      }
+      .right {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="main">
+    <header>
+      <span>brand</span>
+      <span>search</span>
+      <span>login/logout</span>
+    </header>
+    <aside class="left">Left</aside>
+    <main class="content">Content</main>
+    <aside class="right">Right</aside>
+    <footer class="footer">Footer</footer>
+  </div>
+</body>
