@@ -1,0 +1,53 @@
+<form>
+  <p>
+    <label for="name">Enter your name:</label>
+  </p>
+  <input id="name" type="text" name="name" placeholder="Enter name" required />
+
+  <p>Pick a reason:</p>
+
+  <div>
+    <input
+      type="radio"
+      name="type"
+      value="harassment"
+      id="harassment"
+      required
+    />
+    <label for="harassment">Harassment or Bullying</label>
+  </div>
+
+  <div>
+    <input type="radio" name="type" value="violence" id="violence" required />
+    <label for="violence">Violence</label>
+  </div>
+
+  <div>
+    <input type="radio" name="type" value="other" id="other" required />
+    <label for="other">Other</label>
+  </div>
+
+  <p id="details-input">
+    <label for="details">Details:</label>
+    <textarea id="details" name="details"></textarea>
+  </p>
+
+  <button>Submit</button>
+</form>
+<script>
+  const form = document.querySelector("form");
+  const name = document.getElementById("name");
+  const details = document.getElementById("details");
+  const detailsInput = document.getElementById("details-input");
+  detailsInput.hidden = true;
+
+  // form.addEventListener("change", (event) => {
+  form.onchange = (event) => {
+    console.log("Form submitted", event);
+    const isType = event.target.name == "type";
+    if (!isType) return;
+    const isOther = event.target.value == "other";
+    detailsInput.hidden = !isOther;
+    details.setAttribute("required", isOther);
+  };
+</script>
