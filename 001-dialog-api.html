@@ -1,0 +1,75 @@
+<style>
+  ::backdrop {
+    background-image: linear-gradient(
+      45deg,
+      magenta,
+      rebeccapurple,
+      dodgerblue,
+      green
+    );
+    opacity: 0.75;
+  }
+  :modal {
+    background: white;
+    border: none;
+    border-radius: 5px;
+    overflow: scroll;
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.5);
+  }
+</style>
+<dialog>
+  <button autofocus>Close</button>
+  <p>This modal dialog has a groovy backdrop!</p>
+  <h1>Super long content!</h1>
+  <p>
+    When implementing a dialog, it is important to consider the most appropriate
+    place to set user focus. When using HTMLDialogElement.showModal() to open a
+    , focus is set on the first nested focusable element. Explicitly indicating
+    the initial focus placement by using the autofocus attribute will help
+    ensure initial focus is set on the element deemed the best initial focus
+    placement for any particular dialog. When in doubt, as it may not always be
+    known where initial focus could be set within a dialog, particularly for
+    instances where a dialog's content is dynamically rendered when invoked, the
+    element itself may provide the best initial focus placement. Ensure a
+    mechanism is provided to allow users to close the dialog. The most robust
+    way to ensure that all users can close the dialog is to include an explicit
+    button to do so, such as a confirmation, cancellation, or close button. By
+    default, a dialog invoked by the showModal() method can be dismissed by
+    pressing the Esc key. A non-modal dialog does not dismiss via the Esc key by
+    default, and depending on what the non-modal dialog represents, it may not
+    be desired for this behavior. Keyboard users expect the Esc key to close
+    modal dialogs; ensure that this behavior is implemented and maintained. If
+    multiple modal dialogs are open, pressing the Esc key should close only the
+    last shown dialog. When using , this behavior is provided by the browser.
+    While dialogs can be created using other elements, the native element
+    provides usability and accessibility features that must be replicated if you
+    use other elements for a similar purpose. If you're creating a custom dialog
+    implementation, ensure that all expected default behaviors are supported and
+    proper labeling recommendations are followed. The element is exposed by
+    browsers in a manner similar to custom dialogs that use the ARIA
+    role="dialog" attribute. elements invoked by the showModal() method
+    implicitly have aria-modal="true", whereas elements invoked by the show()
+    method or displayed using the open attribute or by changing the default
+    display of a are exposed as [aria-modal="false"]. When implementing modal
+    dialogs, everything other than the and its contents should be rendered inert
+    using the inert attribute. When using along with the
+    HTMLDialogElement.showModal() method, this behavior is provided by the
+    browser.
+  </p>
+</dialog>
+<button>Show the dialog</button>
+<script>
+  const dialog = document.querySelector("dialog");
+  const showButton = document.querySelector("dialog + button");
+  const closeButton = document.querySelector("dialog button");
+
+  // "Show the dialog" button opens the dialog modally
+  showButton.addEventListener("click", () => {
+    dialog.showModal();
+  });
+
+  // "Close" button closes the dialog
+  closeButton.addEventListener("click", () => {
+    dialog.close();
+  });
+</script>
