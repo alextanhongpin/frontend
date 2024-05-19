@@ -1,0 +1,41 @@
+<header>
+  <style>
+    @scope {
+      :scope {
+        container-type: inline-size;
+        /* container-name: header; */
+        /* container: header / inline-size; */
+        /*
+cqw: 1% of a query container's width
+cqh: 1% of a query container's height
+cqi: 1% of a query container's inline size
+cqb: 1% of a query container's block size
+cqmin: The smaller value of either cqi or cqb
+cqmax: The larger value of either cqi or cqb
+        */
+      }
+
+      span {
+        font-size: 32px;
+        transform: rotate(270deg);
+        transform-origin: center center;
+        display: none;
+        width: 30px;
+        height: 30px;
+      }
+      /*
+      @container header (min-width: ) {
+      */
+      @container (max-width: 500px) {
+        h1 {
+          display: none;
+        }
+        span {
+          display: block;
+        }
+      }
+    }
+  </style>
+  <span class="hamburger">|||</span>
+  <h1>Ask & Answer</h1>
+</header>
