@@ -1,0 +1,60 @@
+<style>
+  main {
+    counter-reset: box;
+    scroll-snap-type: y mandatory;
+    overflow: hidden;
+    overflow-y: scroll;
+    max-height: 95vh;
+  }
+
+  main > div::before {
+    counter-increment: box;
+    content: "Box " counter(box);
+    font-size: 20px;
+  }
+
+  main > div {
+    border: 1px dashed black;
+    height: 90vh;
+    scroll-snap-align: center;
+  }
+</style>
+
+<main>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+</main>
