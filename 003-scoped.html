@@ -1,0 +1,40 @@
+<style>
+  @scope (.container) to (.excluded) {
+    :scope {
+      background: red;
+    }
+    p {
+      color: blue;
+      font-size: 20px;
+    }
+  }
+  p {
+    color: brown;
+  }
+  img {
+    border: 5px solid red;
+  }
+</style>
+<div class="container">
+  <p>Some text</p>
+  <div>
+    <p class="excluded">excluded text</p>
+  </div>
+</div>
+<p>Some text</p>
+
+<section class="article-body">
+  <style>
+    @scope {
+      img {
+        border: 5px solid black;
+        background-color: goldenrod;
+      }
+    }
+  </style>
+
+  hello world
+  <img src="http://placeholder.com" />
+  <!-- ... -->
+</section>
+<img src="http://placeholder.com" />
