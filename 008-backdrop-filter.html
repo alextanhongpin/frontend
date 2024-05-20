@@ -1,0 +1,34 @@
+<style>
+  ::backdrop {
+    backdrop-filter: blur(3px);
+  }
+  :modal {
+    background: white;
+    border: none;
+    border-radius: 5px;
+    overflow: scroll;
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.5);
+  }
+</style>
+
+<h1>hello</h1>
+<dialog>
+  <button autofocus>Close</button>
+  <p>This modal dialog has a blur backdrop!</p>
+</dialog>
+<button>Show the dialog</button>
+<script>
+  const dialog = document.querySelector("dialog");
+  const showButton = document.querySelector("dialog + button");
+  const closeButton = document.querySelector("dialog button");
+
+  // "Show the dialog" button opens the dialog modally
+  showButton.addEventListener("click", () => {
+    dialog.showModal();
+  });
+
+  // "Close" button closes the dialog
+  closeButton.addEventListener("click", () => {
+    dialog.close();
+  });
+</script>
