@@ -1,0 +1,63 @@
+<number-format value="123465" />
+<script>
+  function formatNumber(number) {
+    // Don't show zeros.
+    if (!number) return "";
+
+    return new Intl.NumberFormat(navigator.language, {
+      notation: "compact",
+    }).format(number);
+  }
+
+  class NumberFormatElement extends HTMLElement {
+    static observedAttributes = ["value"];
+
+    constructor() {
+      // Always call super first in constructor
+      super();
+
+      // Create a shadow root
+      const shadow = this.attachShadow({ mode: "open" });
+
+      // Create spans
+      const wrapper = document.createElement("span");
+      shadow.appendChild(wrapper);
+    }
+
+    connectedCallback() {
+      console.log("Custom element added to page.");
+
+      const value = this.getAttribute("value");
+      this.updateView(this, value);
+    }
+
+    disconnectedCallback() {
+      console.log("Custom element removed from page.");
+    }
+
+    adoptedCallback() {
+      console.log("Custom element moved to new page.");
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+      console.log(`Attribute ${name} has changed.`);
+      this.updateView(this, newValue);
+    }
+
+    updateView(elem, newValue) {
+      const shadow = elem.shadowRoot;
+      shadow.querySelector("span").innerText =
+        `${formatNumber(Number(newValue))}`;
+    }
+    set value(newValue) {
+      this.setAttribute("value", newValue);
+    }
+    get value() {
+      return this.getAttribute("value");
+    }
+  }
+
+  customElements.define("number-format", NumberFormatElement);
+
+  // document.querySelector('number-format').setAttribute('value', 23)
+</script>
