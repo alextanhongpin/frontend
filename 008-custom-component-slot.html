@@ -1,0 +1,30 @@
+<head></head>
+<body>
+  <template id="my-template">
+    <slot name="msg"></slot>
+    <slot name="body"></slot>
+    <slot name="not-filled">wew</slot>
+  </template>
+  <slotted-element>
+    <div slot="msg">hallooo</div>
+    <div slot="body">world</div>
+    <div slot="unknown">what</div>
+  </slotted-element>
+  <script>
+    class SlottedElement extends HTMLElement {
+      constructor() {
+        // Always call super first in constructor
+        super();
+
+        // Create a shadow root
+        const shadow = this.attachShadow({ mode: "open" });
+
+        // Create spans
+        const template = document.getElementById("my-template").content;
+        shadow.appendChild(template.cloneNode(true));
+      }
+    }
+
+    customElements.define("slotted-element", SlottedElement);
+  </script>
+</body>
