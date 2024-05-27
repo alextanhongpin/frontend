@@ -1,0 +1,34 @@
+<head></head>
+<body>
+  <textarea is="dynamic-textarea"></textarea>
+
+  <script>
+    class DynamicTextArea extends HTMLTextAreaElement {
+      /* somehow we can't listen to the value attribute
+      static observedAttributes = ["value"];
+    */
+
+      constructor() {
+        // Always call super first in constructor
+        super();
+
+        // Create a shadow root
+        this.setAttribute("rows", "1");
+        this.setAttribute(
+          "style",
+          `height: ${this.scrollHeight}px; overflow-y: hidden`,
+        );
+        this.addEventListener("input", this.#resize, false);
+      }
+
+      #resize() {
+        this.style.height = 0;
+        this.style.height = this.scrollHeight + "px";
+      }
+    }
+
+    customElements.define("dynamic-textarea", DynamicTextArea, {
+      extends: "textarea",
+    });
+  </script>
+</body>
