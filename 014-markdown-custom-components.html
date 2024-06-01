@@ -1,0 +1,77 @@
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/lib/marked.umd.min.js"></script>
+</head>
+<body>
+  <p is="markdown-paragraph">**hallo** world, this is _amazing_</p>
+  <p is="markdown-paragraph">
+    **hallo** world, this is _amazing_ do you get this I don't
+  </p>
+
+  <style>
+    markdown-display {
+      color: red;
+    }
+  </style>
+  <markdown-display id="markdown">
+    **hallo** world, this is _amazing_
+  </markdown-display>
+
+  <script>
+    class Markdown extends HTMLParagraphElement {
+      /* somehow we can't listen to the value attribute
+      static observedAttributes = ["value"];
+    */
+
+      constructor() {
+        // Always call super first in constructor
+        super();
+        console.log(this.innerText);
+        this.innerHTML = marked.parse(this.innerText);
+      }
+    }
+
+    customElements.define("markdown-paragraph", Markdown, {
+      extends: "p",
+    });
+
+    class MarkdownDisplay extends HTMLElement {
+      #value = "";
+
+      constructor() {
+        // Always call super first in constructor
+        super();
+        this.shadow = this.attachShadow({ mode: "open" });
+        this.#value = this.textContent.trim();
+      }
+
+      connectedCallback() {
+        this.render(this.value);
+      }
+
+      render(value) {
+        this.shadow.innerHTML = marked.parse(value);
+      }
+
+      set value(newValue) {
+        this.#value = newValue;
+        this.render(newValue);
+      }
+
+      get value() {
+        return this.#value;
+      }
+    }
+    setTimeout(() => {
+      document.querySelector("markdown-display").value = `
+# Title
+
+**hallo** world, this is _amazing_ do you get this I don't
+
+1. one
+2. two
+`;
+    }, 1000);
+
+    customElements.define("markdown-display", MarkdownDisplay);
+  </script>
+</body>
