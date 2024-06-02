@@ -1,0 +1,99 @@
+<head>
+  <style>
+    /* the paragraph in simple element is unaffected */
+    p {
+      color: red;
+    }
+
+    /* the paragraph in simple element is unaffected */
+    #one simple-element {
+      p {
+        color: blue;
+      }
+    }
+
+    /* the style only applies at element level */
+    #two simple-element {
+      color: blue;
+    }
+
+    /* we can target any part of the custom component 
+  this is done by adding an attribute `part="your_part_name"`
+*/
+    #three simple-element::part(mypart) {
+      color: red;
+    }
+  </style>
+  <!-- Give this a title to make it easier to access -->
+  <link rel="stylesheet" href="./index.2.css" title="my_stylesheet" />
+</head>
+
+<p>this is a simple non-web component paragraph</p>
+<div id="one">
+  <simple-element></simple-element>
+</div>
+
+<div id="two">
+  <simple-element></simple-element>
+</div>
+
+<div id="three">
+  <simple-element></simple-element>
+</div>
+
+<script type="module">
+  // This only works on chrome, it fails on safari.
+  import css from "./index.css" with { type: "css" };
+  console.log(css); // This is a new css stylesheet.
+
+  // Initialized once to be reused for all web components.
+  const extraSheet = new CSSStyleSheet();
+  // extraSheet.replaceSync("p { color: green; }");
+
+  // This works, but then there is a flash of unstyled content (FOUC).
+  // We should run this before initializing the custom element.
+  /* UPDATE: Fetch using document stylesheets.
+  fetch("index.css")
+    .then((body) => body.text())
+    .then((css) => extraSheet.replace(css));
+  */
+  // NOTE: External stylesheets might be blocked on some CDN.
+  const indexCSS = Array.from(document.styleSheets).find(
+    (sheet) => sheet.title === "my_stylesheet",
+  );
+  // You can't use this directly, web component will throw an error.
+  console.log(indexCSS);
+  Array.from(indexCSS.cssRules).forEach((rule) => {
+    extraSheet.insertRule(rule.cssText);
+  });
+
+  // Import doesn't work at all.
+  // See here: https://github.com/WICG/construct-stylesheets/issues/119#issuecomment-588352418
+  // extraSheet.replace("@import './index.css';");
+
+  // Combine the existing sheets and new one
+  // document.adoptedStyleSheets = [...document.adoptedStyleSheets, extraSheet];
+
+  class SimpleElement extends HTMLElement {
+    constructor() {
+      // Always call super first in constructor
+      super();
+
+      // Create a shadow root, accessible via this.shadowRoot
+      this.attachShadow({ mode: "open" });
+      this.shadowRoot.adoptedStyleSheets = [
+        extraSheet,
+        // css,
+        // ...document.styleSheets,
+      ];
+    }
+
+    connectedCallback() {
+      this.shadowRoot.innerHTML = "<p part='mypart'>Hello, World!</p>";
+    }
+  }
+
+  customElements.define("simple-element", SimpleElement);
+
+  // document.querySelector('number-format').setAttribute('value', 23)
+</script>
