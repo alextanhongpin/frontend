@@ -1,0 +1,18 @@
+<style>
+  .placeholder:empty::before {
+    display: block;
+    content: attr(data-placeholder);
+    color: gray;
+    font-style: italic;
+  }
+</style>
+
+<p>
+  Use css `:empty` to add placeholder, instead of adding/removing content
+  manually!
+</p>
+<div class="placeholder" data-placeholder="There are no answers yet"></div>
+
+<div class="placeholder" data-placeholder="There are no answers yet">
+  This is not empty!
+</div>
