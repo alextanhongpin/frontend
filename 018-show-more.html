@@ -1,0 +1,84 @@
+<style>
+  :root {
+    --height: 48px;
+  }
+  .content {
+    max-width: 400px;
+    max-height: 320px;
+    overflow: hidden;
+    position: relative;
+  }
+  label {
+    height: var(--height);
+    line-height: var(--height);
+    position: absolute;
+    top: calc(320px - var(--height));
+    /* from bottom to top */
+    background: linear-gradient(0deg, white, rgba(255, 255, 255, 0.75));
+    width: 100%;
+    left: 0;
+    text-align: center;
+    cursor: pointer;
+  }
+  label::before {
+    display: block;
+    content: "Expand";
+  }
+  input {
+    display: none;
+  }
+  .content:has(input:checked) {
+    max-height: 100%;
+    label {
+      /*top: calc(100% - var(--height));*/
+      top: 100%;
+    }
+    /*
+    label::before {
+      display: block;
+      content: "Show less";
+    }*/
+  }
+</style>
+
+<div class="content">
+  <input type="checkbox" id="ch" />
+  <label for="ch"></label>
+
+  <div class="text">
+    test test test test test test test test test test test test test test test
+    test test test test test test test test test test test test test test test
+    test test test test test test test test test test test test test test test
+    test test test test test test test test test test test test test test test
+    test test test test test test test test test test test test test test test
+    test test test test test test test test test test test test test test test
+    test test test test test test test test test test test test test test test
+    test test test test test test test test test test test test test test test
+    test test test test test test test test test test test test test test test
+    test test test test test test test test test test test test test test test
+    test test test test test test test test test test test test test test test
+    test test test test test test test test test test test test test test test
+    test test test test test test test test test test test test test test test
+    test test test test test test test test test test test test test test test
+    test test test test test test test test test test test test test test test
+    test test test test test test test test test test test test test test test
+    test test test test test test test test test test test test test test test
+    test test test test test test test test test test test test test test test
+    test test test test test test test test test test test test test test test
+    test test test test test test test test test test test test test test test
+    test test test test test test test test test test test test test test test
+    test test test test test test test test test test test test test test test
+    test test test test test test test test test test test test test test test
+    test test test test test test test test test test test test test test test
+    test test test test test test test test test test test test test test test
+    test test test test test test test test test test test test test test test
+    test test test test test test test test test test test test test test test
+    test test test test test test test test test test test test test test test
+    test test test test test test test test test test test test test test test
+    test test test test test test test test test test test test test test test
+    test test test test test test test test test test test test test test test
+    test test test test test test test test test test test test test test test
+    test test test test test test test test test test test test test test test
+    test test test test
+  </div>
+</div>
