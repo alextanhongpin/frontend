@@ -1,0 +1,43 @@
+<style>
+  my-component {
+    color: red;
+  }
+</style>
+
+<my-component value="2024-01-01">
+  <template shadowrootmode="open">
+    <style>
+      :host {
+        display: block;
+        border: 1px solid black;
+      }
+      [name="header"] {
+        font-size: x-large;
+        color: blue;
+      }
+    </style>
+    <slot name="header"></slot>
+    <slot name="body"></slot>
+    <div class="date"></div>
+  </template>
+
+  <div slot="header">Header</div>
+  <div slot="body">Body</div>
+</my-component>
+<script>
+  customElements.define(
+    "my-component",
+    class extends HTMLElement {
+      constructor() {
+        super();
+        if (!this.shadowRoot) {
+          this.attachShadow({ mode: "open" });
+        }
+      }
+      connectedCallback() {
+        this.shadowRoot.querySelector(".date").textContent =
+          Intl.DateTimeFormat().format(new Date(this.getAttribute("value")));
+      }
+    },
+  );
+</script>
