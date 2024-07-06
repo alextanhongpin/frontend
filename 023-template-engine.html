@@ -1,0 +1,41 @@
+<head>
+  <title>Simple Template Engine</title>
+</head>
+
+<body>
+  <template id="expense-template">
+    <p>
+      Balance
+      <span data-json="balance"></span>
+    </p>
+
+    <p>
+      Earning
+      <span data-json="income"></span>
+    </p>
+    <p>
+      Spending
+      <span data-json="expense"></span>
+    </p>
+  </template>
+
+  <div id="app"></div>
+  <script>
+    const data = {
+      income: 2000,
+      expense: 1000,
+      get balance() {
+        return this.income - this.expense;
+      },
+    };
+
+    const tpl = document
+      .getElementById("expense-template")
+      .content.cloneNode(true);
+    tpl.querySelectorAll("[data-json]").forEach((el) => {
+      el.textContent = data[el.getAttribute("data-json")];
+    });
+    const app = document.getElementById("app");
+    app.appendChild(tpl);
+  </script>
+</body>
