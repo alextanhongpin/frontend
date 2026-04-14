@@ -7,10 +7,15 @@
 
   .compare {
     --slider-value: 50%;
+    --clip-value: 50%;
     --compare-handle-size: 32px;
+    --dimension: 800px;
+    max-width: var(--dimension);
+    position: relative;
   }
 
   .compare__input {
+    box-sizing: border-box;
     height: 100%;
     position: absolute;
     width: 100%;
@@ -19,6 +24,7 @@
     z-index: 2;
     opacity: 0;
   }
+
   .compare__mask {
     position: absolute;
     top: 0;
@@ -27,16 +33,18 @@
     z-index: 1;
     background: #fff;
     overflow: hidden;
+    /*
     width: var(--slider-value);
+    */
+    clip-path: inset(0 var(--clip-value) 0 0);
   }
 
-  .compare__bottom-image {
-    background-size: cover;
-    object-fit: cover;
-  }
+  .compare__bottom-image,
   .compare__top-image {
-    object-fit: cover;
     background-size: cover;
+    object-fit: cover;
+    max-width: var(--dimension);
+    height: 100%;
   }
   .compare__separator {
     color: #333;
@@ -50,7 +58,6 @@
     z-index: 1;
     pointer-events: none;
   }
-
   .compare__icon {
     position: absolute;
     z-index: 2;
@@ -74,15 +81,15 @@
 <div class="compare compare--tiny-book" style="--slider-value: 48.5%">
   <img
     class="image compare__bottom-image"
-    src="./assets/gemini.png"
-    width="1080"
+    src="./assets/openai.png"
+    width="960"
     height="auto"
   />
   <div class="compare__mask">
     <img
       class="image compare__top-image"
       src="./assets/original.jpeg"
-      width="1080"
+      width="960"
       height="auto"
     />
   </div>
@@ -117,9 +124,17 @@
   // Update the CSS variable on input change
   input.addEventListener("input", () => {
     compareSlider.style.setProperty("--slider-value", `${input.value}%`);
+    compareSlider.style.setProperty(
+      "--clip-value",
+      `${100 - input.valueAsNumber}%`,
+    );
   });
 
   // Update the CSS variable on load
   // to ensure the slider starts in sync with image's width.
   compareSlider.style.setProperty("--slider-value", `${input.value}%`);
+  compareSlider.style.setProperty(
+    "--clip-value",
+    `${100 - input.valueAsNumber}%`,
+  );
 </script>
