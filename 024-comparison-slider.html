@@ -1,0 +1,125 @@
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .compare {
+    --slider-value: 50%;
+    --compare-handle-size: 32px;
+  }
+
+  .compare__input {
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    opacity: 0;
+  }
+  .compare__mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 1;
+    background: #fff;
+    overflow: hidden;
+    width: var(--slider-value);
+  }
+
+  .compare__bottom-image {
+    background-size: cover;
+    object-fit: cover;
+  }
+  .compare__top-image {
+    object-fit: cover;
+    background-size: cover;
+  }
+  .compare__separator {
+    color: #333;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    left: var(--slider-value);
+    width: 2px;
+    margin-left: -1px;
+    background: currentColor;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .compare__icon {
+    position: absolute;
+    z-index: 2;
+    width: var(--compare-handle-size);
+    height: var(--compare-handle-size);
+    top: 50%;
+    left: var(--slider-value);
+    transform: translate(-50%, -50%);
+    padding: 6px;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    background: #fff;
+  }
+
+  .compare__icon path {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2px;
+  }
+</style>
+<div class="compare compare--tiny-book" style="--slider-value: 48.5%">
+  <img
+    class="image compare__bottom-image"
+    src="./assets/gemini.png"
+    width="1080"
+    height="auto"
+  />
+  <div class="compare__mask">
+    <img
+      class="image compare__top-image"
+      src="./assets/original.jpeg"
+      width="1080"
+      height="auto"
+    />
+  </div>
+  <input
+    class="compare__input"
+    type="range"
+    min="0"
+    step="0.5"
+    max="100"
+    value="50"
+  />
+
+  <div class="compare__separator">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      class="compare__icon"
+      viewBox="0 0 16 16"
+    >
+      <path
+        d="M 6 2 L 1 8 L 6 14 M 10 2 L 15 8 L 10 14"
+        stroke="currentColor"
+      ></path>
+    </svg>
+  </div>
+</div>
+<script>
+  // Set element variables
+  const compareSlider = document.querySelector(".compare");
+  const input = compareSlider.querySelector(".compare__input");
+
+  // Update the CSS variable on input change
+  input.addEventListener("input", () => {
+    compareSlider.style.setProperty("--slider-value", `${input.value}%`);
+  });
+
+  // Update the CSS variable on load
+  // to ensure the slider starts in sync with image's width.
+  compareSlider.style.setProperty("--slider-value", `${input.value}%`);
+</script>
